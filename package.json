@@ -1,0 +1,29 @@
+{
+  "name": "library-finder",
+  "version": "1.0.0",
+  "description": "Library Finder & Management System - Sherubtse College (CSP301)",
+  "main": "app.js",
+  "scripts": {
+    "start": "node app.js",
+    "dev": "nodemon app.js",
+    "db:setup": "node scripts/setupDb.js",
+    "db:reset": "node scripts/setupDb.js --reset",
+    "test": "node tests/api.test.js"
+  },
+  "dependencies": {
+    "bcryptjs": "^2.4.3",
+    "connect-pg-simple": "^10.0.0",
+    "dotenv": "^16.4.5",
+    "ejs": "^3.1.10",
+    "express": "^4.19.2",
+    "express-session": "^1.18.0",
+    "pg": "^8.23.1",
+    "pg-promise": "^11.9.1"
+  },
+  "devDependencies": {
+    "nodemon": "^3.1.4"
+  },
+  "engines": {
+    "node": ">=18"
+  }
+}

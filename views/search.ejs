@@ -1,0 +1,15 @@
+<%- include('partials/head') %>
+<h1>Search Results</h1>
+<p class="muted">Showing <%= books.length %> result<%= books.length === 1 ? '' : 's' %> for “<%= q %>”</p>
+<div class="list">
+<% books.forEach(book => { %>
+  <article class="card row">
+    <div class="mini"><%- include('partials/cover', { book }) %></div>
+    <div class="grow"><h3><%= book.title %></h3><p class="muted"><%= book.author %> · <%= book.category || 'Uncategorised' %></p></div>
+    <span class="badge <%= book.available > 0 ? 'ok' : 'err' %>"><%= book.available > 0 ? 'Available: ' + book.available : 'Unavailable' %></span>
+    <a class="btn outline" href="/books/<%= book.id %>">View Details</a>
+  </article>
+<% }) %>
+</div>
+<% if (!books.length) { %><p class="muted empty">Nothing matched. Try a different keyword.</p><% } %>
+<%- include('partials/foot') %>

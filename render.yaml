@@ -1,0 +1,26 @@
+# Render "Blueprint": creates the web service and the PostgreSQL database together.
+# Render dashboard > New > Blueprint > pick this GitHub repository.
+databases:
+  - name: library-finder-db
+    databaseName: library_finder
+    plan: free
+
+services:
+  - type: web
+    name: library-finder
+    runtime: node
+    plan: free
+    buildCommand: npm install && npm run db:setup   # db:setup is safe to repeat, it never deletes data
+    startCommand: npm start
+    healthCheckPath: /health
+    envVars:
+      - key: NODE_ENV
+        value: production
+      - key: DATABASE_URL
+        fromDatabase:
+          name: library-finder-db
+          property: connectionString
+      - key: SESSION_SECRET
+        generateValue: true
+      - key: LIBRARIAN_CODE
+        sync: false        # you type this value in the Render dashboard

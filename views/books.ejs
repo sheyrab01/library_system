@@ -1,0 +1,18 @@
+<%- include('partials/head') %>
+<h1>Books</h1>
+<p class="filter-label">Genre</p>
+<div class="chips" id="genreChips">
+  <button class="chip <%= genre==='all'?'on':'' %>" data-genre="all">All</button>
+  <% genres.forEach(g => { %><button class="chip <%= genre===g?'on':'' %>" data-genre="<%= g %>"><%= g === 'Classic' ? 'Classics' : g %></button><% }) %>
+</div>
+<p class="filter-label">Subject</p>
+<div class="chips" id="chips">
+  <button class="chip <%= category==='all'?'on':'' %>" data-cat="all">All</button>
+  <% categories.forEach(c => { %><button class="chip <%= category===c.name?'on':'' %>" data-cat="<%= c.name %>"><%= c.name %></button><% }) %>
+</div>
+<input id="liveSearch" class="big-search" placeholder="Search by title, author or keyword... (results update as you type)">
+<section class="grid" id="bookGrid">
+  <% books.forEach(book => { %><%- include('partials/bookcard', { book }) %><% }) %>
+</section>
+<p class="muted empty" id="emptyMsg" <%- books.length ? 'hidden' : '' %>>No books found.</p>
+<%- include('partials/foot') %>

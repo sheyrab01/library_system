@@ -1,0 +1,19 @@
+<%- include('../partials/head') %>
+<h1><%= book.id ? 'Edit Book' : 'Add Book' %></h1>
+<% errors.forEach(e => { %><div class="flash error"><%= e %></div><% }) %>
+<form class="card form two" method="post" action="<%= book.id ? '/librarian/books/' + book.id : '/librarian/books' %>">
+  <label>Title<input name="title" required value="<%= book.title || '' %>"></label>
+  <label>Author<input name="author" required value="<%= book.author || '' %>"></label>
+  <label>ISBN<input name="isbn" required value="<%= book.isbn || '' %>"></label>
+  <label>Genre<select name="genre">
+    <% genres.forEach(g => { %><option value="<%= g %>" <%= (book.genre || 'Non-Fiction') === g ? 'selected' : '' %>><%= g %></option><% }) %></select></label>
+  <label>Category<select name="category_id"><option value="">— none —</option>
+    <% categories.forEach(c => { %><option value="<%= c.id %>" <%= Number(book.category_id) === c.id ? 'selected' : '' %>><%= c.name %></option><% }) %></select></label>
+  <label>Quantity (total copies)<input type="number" min="0" name="quantity" value="<%= book.quantity ?? 1 %>"></label>
+  <label>Location<input name="location" placeholder="Main Library - Shelf A3" value="<%= book.location || '' %>"></label>
+  <label>Published year<input type="number" name="published_year" value="<%= book.published_year || '' %>"></label>
+  <label class="full">Cover image link (optional, leave empty to use the Open Library cover for the ISBN)<input name="cover_url" placeholder="https://..." value="<%= book.cover_url || '' %>"></label>
+  <label class="full">Description<textarea name="description" rows="4"><%= book.description || '' %></textarea></label>
+  <div class="full"><button class="btn primary">Save</button> <a class="btn outline" href="/librarian/books">Cancel</a></div>
+</form>
+<%- include('../partials/foot') %>

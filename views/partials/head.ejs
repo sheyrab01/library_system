@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title><%= title %> · Library Finder</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Poppins:wght@600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/css/style.css">
+</head>
+<body class="<%= user ? 'app' : 'auth' %>">
+<% if (user) { const lib = user.role === 'librarian'; %>
+<aside class="sidebar" id="sidebar">
+  <div class="brand"><span class="brand-icon">📖</span><span>Library Finder &amp;<br>Management System</span></div>
+  <nav>
+    <a href="/" class="<%= active==='home'?'on':'' %>">🏠 Home</a>
+    <a href="/books" class="<%= active==='browse'?'on':'' %>">📚 Browse Books</a>
+    <% if (!lib) { %><a href="/my-borrowings" class="<%= active==='mine'?'on':'' %>">🔖 My Borrowings</a><% } %>
+    <% if (lib) { %>
+      <a href="/librarian/books" class="<%= active==='manage'?'on':'' %>">🗂️ Manage Books</a>
+      <a href="/librarian/categories" class="<%= active==='categories'?'on':'' %>">🏷️ Manage Categories</a>
+      <a href="/librarian/borrowings" class="<%= active==='records'?'on':'' %>">📋 Borrowing Records</a>
+    <% } %>
+  </nav>
+  <form method="post" action="/logout"><button class="logout">↩ Logout</button></form>
+</aside>
+<div class="main">
+  <header class="topbar">
+    <button class="burger" onclick="document.getElementById('sidebar').classList.toggle('open')">☰</button>
+    <form class="topsearch" action="/search" method="get">
+      <input name="q" value="<%= q %>" placeholder="Search books, authors, or ISBN..." autocomplete="off">
+    </form>
+    <div class="who"><span class="avatar"><%= user.name[0] %></span><%= user.name.split(' ')[0] %> <small>(<%= lib ? 'Librarian' : 'Student' %>)</small></div>
+  </header>
+  <main class="content">
+<% } else { %><main class="auth-box"><% } %>
+<% if (flash) { %><div class="flash <%= flash.type %>"><%= flash.text %></div><% } %>

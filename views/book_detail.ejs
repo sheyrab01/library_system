@@ -1,0 +1,31 @@
+<%- include('partials/head') %>
+<a href="/books" class="muted small">← Back to books</a>
+<section class="card detail">
+  <div class="big-cover"><%- include('partials/cover', { book }) %></div>
+  <div class="grow">
+    <h1><%= book.title %></h1>
+    <p class="muted"><%= book.author %><%= book.published_year ? ' · ' + book.published_year : '' %></p>
+    <dl class="meta">
+      <div><dt>Genre</dt><dd><%= book.genre %></dd></div>
+      <div><dt>Category</dt><dd><%= book.category || '—' %></dd></div>
+      <div><dt>ISBN</dt><dd><%= book.isbn %></dd></div>
+      <div><dt>Location</dt><dd><%= book.location || '—' %></dd></div>
+    </dl>
+    <div class="actions">
+      <span class="badge lg <%= book.available > 0 ? 'ok' : 'err' %>"><%= book.available > 0 ? 'Available: ' + book.available : 'Unavailable' %></span>
+      <% if (user.role === 'student') { %>
+        <% if (alreadyBorrowed) { %><span class="badge lg warn">You have this book</span>
+        <% } else { %>
+          <form method="post" action="/books/<%= book.id %>/borrow"><button class="btn primary" <%= book.available > 0 ? '' : 'disabled' %>>Borrow Book</button></form>
+        <% } %>
+      <% } %>
+    </div>
+    <p class="muted small">Loan period: <%= loanDays %> days.</p>
+  </div>
+</section>
+<section class="card"><h2>Description</h2><p><%= book.description || 'No description yet.' %></p></section>
+<% if (similar.length) { %>
+<h2>Similar Books</h2>
+<section class="grid small"><% similar.forEach(book => { %><%- include('partials/bookcard', { book }) %><% }) %></section>
+<% } %>
+<%- include('partials/foot') %>

@@ -1,0 +1,14 @@
+<%- include('../partials/head') %>
+<h1>Manage Categories</h1>
+<form class="card form inline" method="post" action="/librarian/categories">
+  <input name="name" placeholder="New category name" required>
+  <input name="description" placeholder="Description (optional)">
+  <button class="btn primary">Add</button>
+</form>
+<div class="card table-wrap"><table>
+  <thead><tr><th>Name</th><th>Description</th><th>Books</th><th></th></tr></thead><tbody>
+  <% categories.forEach(c => { %>
+    <tr><td><%= c.name %></td><td class="muted"><%= c.description || '—' %></td><td><%= c.book_count %></td>
+      <td><form method="post" action="/librarian/categories/<%= c.id %>/delete" data-confirm="Delete category “<%= c.name %>”?"><button class="btn sm danger">Delete</button></form></td></tr>
+  <% }) %></tbody></table></div>
+<%- include('../partials/foot') %>

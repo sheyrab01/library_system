@@ -1,0 +1,15 @@
+<%- include('partials/head') %>
+<div class="auth-card">
+  <div class="brand dark"><span class="brand-icon">📖</span><span>Library Finder &amp; Management System</span></div>
+  <h1>Welcome back</h1>
+  <p class="muted">Sherubtse College Library</p>
+  <form method="post" action="/login" class="form">
+    <div class="role-pick"><label><input type="radio" name="role" value="student" checked> Student</label><label><input type="radio" name="role" value="librarian"> Librarian</label></div>
+    <label>Email<input type="email" name="email" required placeholder="you@sherubtse.edu.bt"></label>
+    <label>Password<input type="password" name="password" required></label>
+    <button class="btn primary block">Log in</button>
+  </form>
+  <p class="muted small">No account? <a href="/register">Register as a student</a></p>
+  <p class="muted small">Library staff? <a href="/register/librarian">Register as a librarian</a></p>
+</div>
+<%- include('partials/foot') %>

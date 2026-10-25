@@ -1,0 +1,10 @@
+<%- include('../partials/head') %>
+<h1>Borrowing Records</h1>
+<div class="card table-wrap"><table>
+  <thead><tr><th>Book</th><th>Student</th><th>Borrowed</th><th>Due</th><th>Returned</th><th>Status</th><th></th></tr></thead><tbody>
+  <% borrowings.forEach(b => { %>
+    <tr><td><%= b.title %></td><td><%= b.student_name %> <small class="muted">(<%= b.student_number %>)</small></td><td><%= fmtDate(b.borrowed_at) %></td><td><%= fmtDate(b.due_at) %></td><td><%= fmtDate(b.returned_at) %></td>
+      <td><span class="badge <%= {Borrowed:'info',Returned:'ok',Overdue:'err'}[b.status] %>"><%= b.status %></span></td>
+      <td><% if (!b.returned_at) { %><form method="post" action="/borrowings/<%= b.id %>/return"><input type="hidden" name="back" value="/librarian/borrowings"><button class="btn sm outline">Mark returned</button></form><% } %></td></tr>
+  <% }) %></tbody></table></div>
+<%- include('../partials/foot') %>

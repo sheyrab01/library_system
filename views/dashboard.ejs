@@ -1,0 +1,14 @@
+<%- include('partials/head') %>
+<section class="hero"><h1>Welcome, <%= user.name.split(' ')[0] %>!</h1><p>Find your next great read.</p></section>
+<section class="stats">
+  <div class="card stat"><span class="ico blue">📘</span><small>Total Books</small><b data-stat="total"><%= stats.total %></b></div>
+  <div class="card stat"><span class="ico green">✔</span><small>Available</small><b data-stat="available"><%= stats.available %></b></div>
+  <div class="card stat"><span class="ico orange">⏱</span><small>Borrowed</small><b data-stat="borrowed"><%= stats.borrowed %></b></div>
+  <div class="card stat"><span class="ico purple">▦</span><small>Categories</small><b data-stat="categories"><%= stats.categories %></b></div>
+  <% if (user.role === 'librarian') { %><div class="card stat"><span class="ico red">⚠</span><small>Overdue</small><b data-stat="overdue"><%= stats.overdue %></b></div><% } %>
+</section>
+<div class="row-head"><h2>Popular Books</h2><a href="/books">View all →</a></div>
+<section class="grid small">
+  <% popular.forEach(book => { %><%- include('partials/bookcard', { book }) %><% }) %>
+</section>
+<%- include('partials/foot') %>

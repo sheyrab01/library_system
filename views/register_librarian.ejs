@@ -1,0 +1,15 @@
+<%- include('partials/head') %>
+<div class="auth-card">
+  <div class="brand dark"><span class="brand-icon">📖</span><span>Create librarian account</span></div>
+  <form method="post" action="/register/librarian" class="form">
+    <label>Full name<input name="name" required></label>
+    <label>Staff ID<input name="student_id" required></label>
+    <label>Email<input type="email" name="email" required></label>
+    <label>Password<input type="password" name="password" minlength="6" required></label>
+    <label>Confirm password<input type="password" name="confirm_password" minlength="6" required></label>
+    <label>Librarian access code<input type="password" name="librarian_code" required autocomplete="off"></label>
+    <button class="btn primary block">Register as librarian</button>
+  </form>
+  <p class="muted small"><a href="/register">Register as a student</a> · <a href="/login">Log in</a></p>
+</div>
+<%- include('partials/foot') %>

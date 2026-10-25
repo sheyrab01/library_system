@@ -1,0 +1,8 @@
+<article class="card book-card">
+  <a href="/books/<%= book.id %>"><%- include('cover', { book }) %></a>
+  <h3><%= book.title %></h3>
+  <p class="muted"><%= book.author %></p>
+  <small class="genre-tag"><%= book.genre %></small>
+  <span class="badge <%= book.available > 0 ? 'ok' : 'err' %>"><%= book.available > 0 ? 'Available: ' + book.available : 'Unavailable' %></span>
+  <a class="btn block" href="/books/<%= book.id %>">View Details</a>
+</article>

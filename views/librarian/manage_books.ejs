@@ -1,0 +1,12 @@
+<%- include('../partials/head') %>
+<div class="row-head"><h1>Manage Books</h1><a class="btn primary" href="/librarian/books/new">+ Add Book</a></div>
+<div class="card table-wrap"><table>
+  <thead><tr><th>Title</th><th>Author</th><th>Genre</th><th>Category</th><th>Qty</th><th>Avail.</th><th>Actions</th></tr></thead>
+  <tbody>
+  <% books.forEach(b => { %>
+    <tr><td><a href="/books/<%= b.id %>"><%= b.title %></a></td><td><%= b.author %></td><td><%= b.genre %></td><td><%= b.category || '—' %></td><td><%= b.quantity %></td><td><%= b.available %></td>
+      <td class="acts"><a class="btn sm outline" href="/librarian/books/<%= b.id %>/edit">Edit</a>
+        <form method="post" action="/librarian/books/<%= b.id %>/delete" data-confirm="Delete “<%= b.title %>”?"><button class="btn sm danger">Delete</button></form></td></tr>
+  <% }) %>
+  </tbody></table></div>
+<%- include('../partials/foot') %>
